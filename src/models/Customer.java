@@ -9,6 +9,9 @@ public class Customer {
     private Integer age;
     private List<Contact> contacts;
 
+    public Customer() {
+    }
+
     public Customer(String name, String surname, Integer age, String city) {
         this.name = name;
         this.surname = surname;
@@ -27,5 +30,25 @@ public class Customer {
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public Integer getAge() {
+        return age;
     }
 }

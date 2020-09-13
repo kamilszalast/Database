@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class CustomersParserStrategy {
     List<AbstractCustomersParserStrategy> strategies = Arrays.asList(new CsvStrategy(), new XmlStrategy());
 
-    List<Customer> parseFile(String path) {
+    public List<Customer> parseFile(String path) {
         return strategies.stream()
                 .filter(s -> s.getFileType(path))
                 .findFirst()

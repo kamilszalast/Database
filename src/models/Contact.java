@@ -9,4 +9,8 @@ public class Contact {
         this.type = type;
         this.contact = contact;
     }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
 }

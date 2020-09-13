@@ -5,4 +5,10 @@ public class CustomerEntity {
     private String NAME;
     private String SURNAME;
     private Integer AGE;
+
+    public Long getID() {
+        return ID;
+    }
 }
+
+
