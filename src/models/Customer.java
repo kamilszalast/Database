@@ -16,13 +16,14 @@ public class Customer {
         this.age = age;
     }
 
-    public static Customer createCustomer(String[] data) {
-        String nameData = data[0];
-        String surnameData = data[1];
-        Integer ageData = Integer.parseInt(data[2]);
-        String cityData = data[3];
-        return new Customer(nameData, surnameData, ageData, cityData);
+    public Customer(String name, String surname, Integer age, String city, List<Contact> contacts) {
+        this.name = name;
+        this.surname = surname;
+        this.city = city;
+        this.age = age;
+        this.contacts = contacts;
     }
+
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;

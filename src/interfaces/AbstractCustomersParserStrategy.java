@@ -10,7 +10,6 @@ public interface AbstractCustomersParserStrategy {
 
     List<Customer> parseCustomersFromFile(String path);
 
-    List<String> parseContactsFromFile(String path);
 
     List<Contact> createContact(List<String> contacts);
 }

@@ -19,4 +19,9 @@ public class ContactFactory {
                 .map(s1 -> s1.getContactType())
                 .orElse(0);
     }
+
+    public Contact create(String contact) {
+        return new Contact(getValidContactType(contact), contact);
+    }
+
 }
