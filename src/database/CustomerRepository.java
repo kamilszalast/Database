@@ -1,24 +1,21 @@
 package database;
 
+import models.ContactEntity;
 import models.Customer;
 import models.CustomerEntity;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-public class CustomerRepository extends CustomerService {
-    static int counter = 100;
+public class CustomerRepository {
+    static int counter = 1;
+    Connection connection = MyConnection.getConnection();
 
     /**
      * Zapis do bazy danych w tym miejscu
      */
-
-    CustomerEntity save(Customer customer) {
-        Connection connection = MyConnection.getConnection();
+    void createTable() {
         try {
-            System.out.println("Creating table...");
+            System.out.println("Creating table customers...");
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE CUSTOMERS " +
                     "(id INTEGER not NULL, " +
@@ -27,14 +24,24 @@ public class CustomerRepository extends CustomerService {
                     " age INTEGER, " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
-            sql = "INSERT INTO CUSTOMERS " +
-                    "VALUES (" + counter + ", '" + customer.getName() + "','" + customer.getSurname() + "'," + customer.getAge() + ")";
-            stmt.executeUpdate(sql);
-            counter++;
         } catch (Exception e) {
             System.out.println(e);
         }
 
+    }
+
+
+    CustomerEntity save(Customer customer) {
+        try {
+            Statement stmt = connection.createStatement();
+            String sql = "INSERT INTO CUSTOMERS " +
+                    "VALUES (" + counter + ",'" + customer.getName() + "','" + customer.getSurname() + "'," + customer.getAge() + ")";
+            stmt.executeUpdate(sql);
+            return new CustomerEntity(new Long(counter++), customer.getName(), customer.getSurname(), customer.getAge());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return null;
     }
 }

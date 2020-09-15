@@ -9,20 +9,24 @@ import java.util.Collections;
 import java.util.List;
 
 public class Worker {
+
     void doWork() {
         Chat ch1 = new Chat();
-        CustomersParserStrategy cps1 = new CustomersParserStrategy();
+        CustomersParserStrategy customersParserStrategy = new CustomersParserStrategy();
         String filePath = ch1.getFilePath();
         Boolean isPathValid = FileUtils.isFilePathValid(filePath);
-        List<Customer> customersList = cps1.parseFile(filePath);
-        saveToDatabase(customersList);
+        if (isPathValid) {
+            List<Customer> customersList = customersParserStrategy.parseFile(filePath);
+            saveToDatabase(customersList);
+        } else {
+            System.out.println("Scieżka do pliku błędna");
+        }
+
     }
 
-    /**
-     * Fix this method
-     */
     void saveToDatabase(List<Customer> customers) {
-/*        customers.stream()
+        ContactService contactService = new ContactService();
+        customers.stream()
                 .map(customer -> {
                     CustomerEntity customerEntity = new CustomerService().save(customer);
                     customer.getContacts()
@@ -30,7 +34,7 @@ public class Worker {
                     return customer.getContacts();
                 })
                 .flatMap(Collection::stream)
-                .forEach();*/
+                .forEach(contactService::save);
     }
 
 

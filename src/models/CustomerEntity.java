@@ -9,6 +9,13 @@ public class CustomerEntity {
     public Long getID() {
         return ID;
     }
+
+    public CustomerEntity(Long ID, String NAME, String SURNAME, Integer AGE) {
+        this.ID = ID;
+        this.NAME = NAME;
+        this.SURNAME = SURNAME;
+        this.AGE = AGE;
+    }
 }
 
 

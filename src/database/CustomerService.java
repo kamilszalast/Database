@@ -4,8 +4,14 @@ import models.Customer;
 import models.CustomerEntity;
 
 public class CustomerService {
+    CustomerRepository customerRepository = new CustomerRepository();
+
     CustomerEntity save(Customer customer) {
-        return null;
+        return customerRepository.save(customer);
+    }
+
+    void createTable() {
+        customerRepository.createTable();
     }
 
 }

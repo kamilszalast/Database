@@ -13,4 +13,16 @@ public class Contact {
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public String getContact() {
+        return contact;
+    }
 }
