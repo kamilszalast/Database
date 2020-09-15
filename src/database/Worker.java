@@ -26,6 +26,10 @@ public class Worker {
 
     void saveToDatabase(List<Customer> customers) {
         ContactService contactService = new ContactService();
+        CustomerService customerService = new CustomerService();
+        customerService.createTable();
+        contactService.createTable();
+
         customers.stream()
                 .map(customer -> {
                     CustomerEntity customerEntity = new CustomerService().save(customer);
