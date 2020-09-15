@@ -7,4 +7,4 @@ I tried to implement Design Patterns in my project (Strategy, Factory) because I
 I am aware of securing login and password, thats why it's not directly in source code, I read it from /Outside_Files/password_file.
 I know it should be hide in *.yml file but I wasn't able to implement it (I will correct that in the future).
 
-###Parsing .csv file is working
+### Parsing .csv file is working
