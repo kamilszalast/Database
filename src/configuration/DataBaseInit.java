@@ -16,7 +16,7 @@ public class DataBaseInit {
             System.out.println("Creating table customers...");
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE CUSTOMERS " +
-                    "(id INTEGER not NULL, " +
+                    "(id INTEGER NOT NULL AUTO_INCREMENT," +
                     " name VARCHAR(255), " +
                     " surname VARCHAR(255), " +
                     " age INTEGER, " +
@@ -33,7 +33,7 @@ public class DataBaseInit {
             System.out.println("Creating table contacts...");
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE CONTACTS " +
-                    "(id INTEGER not NULL, " +
+                    "(id INTEGER NOT NULL AUTO_INCREMENT," +
                     " id_customer INTEGER, " +
                     " type INTEGER, " +
                     " contact VARCHAR(255), " +

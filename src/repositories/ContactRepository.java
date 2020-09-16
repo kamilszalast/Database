@@ -17,8 +17,8 @@ public class ContactRepository {
     public ContactEntity save(Contact contact) {
         try {
             Statement stmt = connection.createStatement();
-            String sql = "INSERT INTO CONTACTS " +
-                    "VALUES (" + counter + "," + contact.getCustomerId() + "," + contact.getType() + ",'" + contact.getContact() + "')";
+            String sql = "INSERT INTO CONTACTS (id_customer, type, contact) " +
+                    "VALUES (" + contact.getCustomerId() + "," + contact.getType() + ",'" + contact.getContact() + "')";
             stmt.executeUpdate(sql);
             return new ContactEntity(new Long(counter++), contact.getCustomerId(), contact.getType(), contact.getContact());
 

@@ -16,8 +16,8 @@ public class CustomerRepository {
     public CustomerEntity save(Customer customer) {
         try {
             Statement stmt = connection.createStatement();
-            String sql = "INSERT INTO CUSTOMERS " +
-                    "VALUES (" + counter + ",'" + customer.getName() + "','" + customer.getSurname() + "'," + customer.getAge() + ")";
+            String sql = "INSERT INTO CUSTOMERS (name, surname, age) " +
+                    "VALUES ('" + customer.getName() + "','" + customer.getSurname() + "'," + customer.getAge() + ")";
             stmt.executeUpdate(sql);
             return new CustomerEntity(new Long(counter++), customer.getName(), customer.getSurname(), customer.getAge());
 
