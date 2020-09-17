@@ -36,7 +36,7 @@ public class CsvStrategy implements AbstractCustomersParserStrategy {
             while (line != null) {
                 String[] customerData = line.split(",");
                 String[] contactData = Arrays.copyOfRange(customerData, 4, customerData.length);
-                Customer customer = new Customer(customerData[0], customerData[1], StringUtils.isNullOrEmpty(customerData[2]) ? 0 : Integer.parseInt(customerData[2]), customerData[3], createContact(Arrays.asList(contactData)));
+                Customer customer = new Customer(customerData[0], customerData[1], StringUtils.isNullOrEmpty(customerData[2]) ? null : Integer.parseInt(customerData[2]), customerData[3], createContact(Arrays.asList(contactData)));
                 customers.add(customer);
                 line = br.readLine();
             }

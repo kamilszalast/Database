@@ -51,4 +51,20 @@ public class Customer {
     public Integer getAge() {
         return age;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }

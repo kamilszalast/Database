@@ -7,7 +7,8 @@ import models.CustomerEntity;
 import java.sql.*;
 
 public class CustomerRepository {
-    static int counter = 1;
+    // static int counter = 1;
+    private static long id = 0;
     private final Connection connection = MyConnection.getConnection();
 
     /**
@@ -18,8 +19,12 @@ public class CustomerRepository {
             Statement stmt = connection.createStatement();
             String sql = "INSERT INTO CUSTOMERS (name, surname, age) " +
                     "VALUES ('" + customer.getName() + "','" + customer.getSurname() + "'," + customer.getAge() + ")";
-            stmt.executeUpdate(sql);
-            return new CustomerEntity(new Long(counter++), customer.getName(), customer.getSurname(), customer.getAge());
+            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.first()) {
+                id = rs.getInt(1);
+            }
+            return new CustomerEntity(id, customer.getName(), customer.getSurname(), customer.getAge());
 
         } catch (Exception e) {
             System.out.println(e);

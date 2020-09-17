@@ -4,6 +4,7 @@ import factories.ContactFactory;
 import models.Contact;
 import models.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class XmlStrategy implements AbstractCustomersParserStrategy {
@@ -20,6 +21,13 @@ public class XmlStrategy implements AbstractCustomersParserStrategy {
 
     @Override
     public List<Customer> parseCustomersFromFile(String path) {
+        List<Customer> customers = new ArrayList<>();
+        try {
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         return null;
     }
 
