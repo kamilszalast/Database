@@ -5,6 +5,10 @@ public class Contact {
     private int type;
     private String contact;
 
+    public Contact() {
+    }
+
+
     public Contact(int type, String contact) {
         this.type = type;
         this.contact = contact;
@@ -24,5 +28,13 @@ public class Contact {
 
     public String getContact() {
         return contact;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

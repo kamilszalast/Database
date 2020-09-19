@@ -8,6 +8,6 @@ public class PhoneStrategy implements AbstractContactTypeStrategy {
 
     @Override
     public boolean isValidContactType(String contact) {
-        return contact.matches("^[1-9]{1}[0-9]{2}[ ][0-9]{3}[ ][0-9]{3}");
+        return contact.matches("^(\\d{3}[- .]?){2}\\d{3}$");
     }
 }

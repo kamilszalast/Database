@@ -28,10 +28,6 @@ public class Customer {
     }
 
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
-    }
-
     public String getName() {
         return name;
     }
@@ -40,16 +36,16 @@ public class Customer {
         return surname;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
     public String getCity() {
         return city;
     }
 
     public Integer getAge() {
         return age;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
     }
 
     public void setName(String name) {
@@ -67,4 +63,9 @@ public class Customer {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
 }
