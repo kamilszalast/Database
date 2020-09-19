@@ -10,6 +10,7 @@ import strategies.parser.SAXParser.MyHandler;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,15 +30,14 @@ public class XmlStrategy implements AbstractCustomersParserStrategy {
     @Override
     public List<Customer> parseCustomersFromFile(String path) {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+        MyHandler handler = new MyHandler();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
-            MyHandler handler = new MyHandler();
-            saxParser.parse(path, handler);
-            return handler.getCustomers();
+            saxParser.parse(new File(path), handler);
         } catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return handler.getCustomers();
     }
 
 

@@ -1,17 +1,13 @@
 package strategies.parser.SAXParser;
 
-import factories.ContactFactory;
 import models.Contact;
 import models.Customer;
-import models.Customers;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import strategies.contact.ContactStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MyHandler extends DefaultHandler {
     private static final String PERSON = "person";
@@ -29,7 +25,7 @@ public class MyHandler extends DefaultHandler {
     private List<Contact> contacts = null;
     private Customer customer = null;
     private Contact contact = null;
-    private String elementValue = null;
+    private StringBuilder data = null;
 
     boolean bname = false;
     boolean bsurname = false;
@@ -41,94 +37,84 @@ public class MyHandler extends DefaultHandler {
     boolean bicq = false;
     boolean bjabber = false;
 
-    @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
-        elementValue = new String(ch, start, length);
-    }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        switch (qName) {
-            case PERSON:
-                customer = new Customer();
-                if (customers == null) customers = new ArrayList<>();
-                break;
-            case NAME:
-                bname = true;
-                break;
-            case SURNAME:
-                bsurname = true;
-                break;
-            case AGE:
-                bage = true;
-                break;
-            case CITY:
-                bcity = true;
-                break;
-            case CONTACTS:
-                if (contacts == null) contacts = new ArrayList<>();
-                bcontacts = true;
-                break;
-            case EMAIL:
-                contact = new Contact();
-                bemail = true;
-                break;
-            case PHONE:
-                contact = new Contact();
-                bphone = true;
-                break;
-            case ICQ:
-                contact = new Contact();
-                bicq = true;
-                break;
-            case JABBER:
-                contact = new Contact();
-                bjabber = true;
+        if (qName.equals(PERSON))
+            customer = new Customer();
+        if (customers == null) customers = new ArrayList<>();
+        else if (qName.equals(NAME))
+            bname = true;
+        else if (qName.equals(SURNAME))
+            bsurname = true;
+        else if (qName.equals(AGE))
+            bage = true;
+        else if (qName.equals(CITY))
+            bcity = true;
+        else if (qName.equals(CONTACTS)) {
+            if (contacts == null) contacts = new ArrayList<>();
+            bcontacts = true;
+        } else if (qName.equals(EMAIL)) {
+            contact = new Contact();
+            bemail = true;
+        } else if (qName.equals(PHONE)) {
+            contact = new Contact();
+            bphone = true;
+        } else if (qName.equals(ICQ)) {
+            contact = new Contact();
+            bicq = true;
+        } else if (qName.equals(JABBER)) {
+            contact = new Contact();
+            bjabber = true;
         }
+        data = new StringBuilder();
+    }
+
+    @Override
+    public void characters(char[] ch, int start, int length) throws SAXException {
+        data.append(new String(ch, start, length));
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (bname) {
-            customer.setName(elementValue);
+            customer.setName(data.toString());
             bname = false;
         } else if (bsurname) {
-            customer.setSurname(elementValue);
+            customer.setSurname(data.toString());
             bsurname = false;
         } else if (bage) {
 
-            customer.setAge(Integer.parseInt(elementValue));
+            customer.setAge(Integer.parseInt(data.toString()));
             bage = false;
         } else if (bcity) {
-
-            customer.setCity(elementValue);
+            customer.setCity(data.toString());
             bcity = false;
         } else if (bcontacts) {
             customer.setContacts(contacts);
         } else if (bemail) {
             contact.setType(1);
-            contact.setContact(elementValue);
+            contact.setContact(data.toString());
             contacts.add(contact);
             bemail = false;
         } else if (bphone) {
             contact.setType(2);
-            contact.setContact(elementValue);
+            contact.setContact(data.toString());
             contacts.add(contact);
             bphone = false;
         } else if (bicq) {
             contact.setType(0);
-            contact.setContact(elementValue);
+            contact.setContact(data.toString());
             contacts.add(contact);
             bicq = false;
         } else if (bjabber) {
             contact.setType(3);
-            contact.setContact(elementValue);
+            contact.setContact(data.toString());
             contacts.add(contact);
             bjabber = false;
         } else if (qName.equals(NAME)) {
             customers.add(customer);
         }
-
     }
 
     public List<Contact> getContacts() {
