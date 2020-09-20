@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class PasswordInserter {
     public static String[] passwordInsert() {
         String[] userdata = new String[2];
-        System.out.println("Podaj sciezke do pliku z loginem i hasłem: ");
+        System.out.println("Podaj ścieżkę do pliku z loginem i hasłem: ");
         Scanner sc = new Scanner(System.in);
         String filePath = sc.nextLine();
         File test1 = new File(filePath);
