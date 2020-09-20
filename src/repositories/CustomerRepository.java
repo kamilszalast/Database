@@ -7,7 +7,6 @@ import models.CustomerEntity;
 import java.sql.*;
 
 public class CustomerRepository {
-    // static int counter = 1;
     private static long id = 0;
     private final Connection connection = MyConnection.getConnection();
 

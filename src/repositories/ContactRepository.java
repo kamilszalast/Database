@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ContactRepository {
-    //private static int counter = 1;
     private static long id = 0;
     private final Connection connection = MyConnection.getConnection();
 

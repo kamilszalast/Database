@@ -3,15 +3,10 @@ package strategies.parser;
 import factories.ContactFactory;
 import models.Contact;
 import models.Customer;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 import strategies.parser.SAXParser.MyHandler;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

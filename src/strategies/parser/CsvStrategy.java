@@ -2,7 +2,6 @@ package strategies.parser;
 
 import com.mysql.cj.util.StringUtils;
 import factories.ContactFactory;
-import strategies.contact.ContactStrategy;
 import models.Contact;
 import models.Customer;
 

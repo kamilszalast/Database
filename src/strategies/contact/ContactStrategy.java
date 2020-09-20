@@ -1,7 +1,5 @@
 package strategies.contact;
 
-import models.Contact;
-
 import java.util.Arrays;
 import java.util.List;
 

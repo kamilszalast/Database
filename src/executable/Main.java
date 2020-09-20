@@ -10,11 +10,6 @@ import strategies.contact.ContactStrategy;
 import strategies.parser.CustomersParserStrategy;
 import utils.Chat;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.regex.Pattern;
 
 public class Main {
 
