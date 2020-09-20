@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class CustomersParserStrategy {
-    List<AbstractCustomersParserStrategy> strategies;
+    private final List<AbstractCustomersParserStrategy> strategies;
 
     public CustomersParserStrategy(ContactFactory contactFactory) {
         strategies = Arrays.asList(new CsvStrategy(contactFactory), new XmlStrategy(contactFactory));
