@@ -12,13 +12,6 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String surname, Integer age, String city) {
-        this.name = name;
-        this.surname = surname;
-        this.city = city;
-        this.age = age;
-    }
-
     public Customer(String name, String surname, Integer age, String city, List<Contact> contacts) {
         this.name = name;
         this.surname = surname;
