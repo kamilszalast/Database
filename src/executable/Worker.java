@@ -8,6 +8,7 @@ import models.CustomerEntity;
 import utils.Chat;
 import utils.FileUtils;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,8 +28,12 @@ public class Worker {
     public void doWork() {
         String filePath = chat.getFilePath();
         if (FileUtils.isFilePathValid(filePath)) {
-            List<Customer> customersList = customersParserStrategy.parseFile(filePath);
-            saveToDatabase(customersList);
+            if (FileUtils.isFileNotEmpty(filePath)) {
+                List<Customer> customersList = customersParserStrategy.parseFile(filePath);
+                saveToDatabase(customersList);
+            } else {
+                System.out.println("Plik jest pusty");
+            }
         } else {
             System.out.println("Podany plik nie istieje");
         }

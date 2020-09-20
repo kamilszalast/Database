@@ -12,4 +12,8 @@ public class FileUtils {
     public static boolean isFilePathValid(String path) {
         return new File(path).exists();
     }
+
+    public static boolean isFileNotEmpty(String path) {
+        return new File(path).length() != 0;
+    }
 }
