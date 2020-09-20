@@ -13,6 +13,7 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class XmlStrategy implements AbstractCustomersParserStrategy {
@@ -33,7 +34,7 @@ public class XmlStrategy implements AbstractCustomersParserStrategy {
         MyHandler handler = new MyHandler();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
-            saxParser.parse(new File(path), handler);
+            saxParser.parse(path, handler);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -43,6 +44,8 @@ public class XmlStrategy implements AbstractCustomersParserStrategy {
 
     @Override
     public List<Contact> createContact(List<String> contacts) {
-        return null;
+        return contacts.stream()
+                .map(contactFactory::create)
+                .collect(Collectors.toList());
     }
 }

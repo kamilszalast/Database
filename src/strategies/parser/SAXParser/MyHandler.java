@@ -1,16 +1,20 @@
 package strategies.parser.SAXParser;
 
+import factories.ContactFactory;
 import models.Contact;
 import models.Customer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import strategies.contact.ContactStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MyHandler extends DefaultHandler {
     private static final String PERSON = "person";
+    private static final String PERSONS = "persons";
     private static final String NAME = "name";
     private static final String SURNAME = "surname";
     private static final String AGE = "age";
@@ -22,103 +26,67 @@ public class MyHandler extends DefaultHandler {
     private static final String JABBER = "jabber";
 
     private List<Customer> customers = null;
-    private List<Contact> contacts = null;
-    private Customer customer = null;
-    private Contact contact = null;
-    private StringBuilder data = null;
+    private List<String> contactsSting = null;
+    private String elementValue;
 
-    boolean bname = false;
-    boolean bsurname = false;
-    boolean bage = false;
-    boolean bcity = false;
-    boolean bcontacts = false;
-    boolean bphone = false;
-    boolean bemail = false;
-    boolean bicq = false;
-    boolean bjabber = false;
+    private final ContactStrategy contactStrategy = new ContactStrategy();
+    private final ContactFactory contactFactory = new ContactFactory(contactStrategy);
 
-
-    @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        if (qName.equals(PERSON))
-            customer = new Customer();
-        if (customers == null) customers = new ArrayList<>();
-        else if (qName.equals(NAME))
-            bname = true;
-        else if (qName.equals(SURNAME))
-            bsurname = true;
-        else if (qName.equals(AGE))
-            bage = true;
-        else if (qName.equals(CITY))
-            bcity = true;
-        else if (qName.equals(CONTACTS)) {
-            if (contacts == null) contacts = new ArrayList<>();
-            bcontacts = true;
-        } else if (qName.equals(EMAIL)) {
-            contact = new Contact();
-            bemail = true;
-        } else if (qName.equals(PHONE)) {
-            contact = new Contact();
-            bphone = true;
-        } else if (qName.equals(ICQ)) {
-            contact = new Contact();
-            bicq = true;
-        } else if (qName.equals(JABBER)) {
-            contact = new Contact();
-            bjabber = true;
-        }
-        data = new StringBuilder();
-    }
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        data.append(new String(ch, start, length));
+        elementValue = new String(ch, start, length);
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName) throws SAXException {
-        if (bname) {
-            customer.setName(data.toString());
-            bname = false;
-        } else if (bsurname) {
-            customer.setSurname(data.toString());
-            bsurname = false;
-        } else if (bage) {
+    public void startDocument() throws SAXException {
+        customers = new ArrayList<>();
+    }
 
-            customer.setAge(Integer.parseInt(data.toString()));
-            bage = false;
-        } else if (bcity) {
-            customer.setCity(data.toString());
-            bcity = false;
-        } else if (bcontacts) {
-            customer.setContacts(contacts);
-        } else if (bemail) {
-            contact.setType(1);
-            contact.setContact(data.toString());
-            contacts.add(contact);
-            bemail = false;
-        } else if (bphone) {
-            contact.setType(2);
-            contact.setContact(data.toString());
-            contacts.add(contact);
-            bphone = false;
-        } else if (bicq) {
-            contact.setType(0);
-            contact.setContact(data.toString());
-            contacts.add(contact);
-            bicq = false;
-        } else if (bjabber) {
-            contact.setType(3);
-            contact.setContact(data.toString());
-            contacts.add(contact);
-            bjabber = false;
-        } else if (qName.equals(NAME)) {
-            customers.add(customer);
+    @Override
+    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+        switch (qName) {
+            case PERSONS:
+                customers = new ArrayList<>();
+                break;
+            case PERSON:
+                customers.add(new Customer());
+                break;
+            case CONTACTS:
+                contactsSting = new ArrayList<>();
+                break;
         }
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+
+    @Override
+    public void endElement(String uri, String localName, String qName) throws SAXException {
+        switch (qName) {
+            case NAME:
+                latestCustomer().setName(elementValue);
+                break;
+            case SURNAME:
+                latestCustomer().setSurname(elementValue);
+                break;
+            case AGE:
+                latestCustomer().setAge(Integer.parseInt(elementValue));
+                break;
+            case CITY:
+                latestCustomer().setCity(elementValue);
+                break;
+            case PHONE:
+            case EMAIL:
+            case ICQ:
+            case JABBER:
+                contactsSting.add(elementValue);
+                break;
+            case CONTACTS:
+                List<Contact> contacts = contactsSting.stream()
+                        .map(contactFactory::create)
+                        .collect(Collectors.toList());
+                latestCustomer().setContacts(contacts);
+                break;
+        }
     }
 
     private Customer latestCustomer() {
