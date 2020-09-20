@@ -25,8 +25,7 @@ public class PasswordInserter {
                 i++;
             }
             return userdata;
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
         return null;

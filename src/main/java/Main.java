@@ -14,14 +14,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        initDatabase();
-        createWorker().doWork();
+        if (initDatabase()) {
+            createWorker().doWork();
+        } else System.out.println("Błąd połączenia z bazą danych");
 
     }
 
-    private static void initDatabase() {
+    private static boolean initDatabase() {
         DataBaseInit databaseInit = new DataBaseInit();
-        databaseInit.createDatabase();
+        return databaseInit.createDatabase();
     }
 
     private static Worker createWorker() {

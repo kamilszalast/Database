@@ -6,14 +6,16 @@ import java.sql.Statement;
 public class DataBaseInit {
     private final Connection connection = MyConnection.getConnection();
 
-    public void createDatabase() {
-        createTableCustomers();
-        createTableContacts();
+    public boolean createDatabase() {
+        if (connection != null) {
+            createTableCustomers();
+            createTableContacts();
+            return true;
+        } else return false;
     }
 
     private void createTableCustomers() {
         try {
-            System.out.println("Creating table customers...");
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE CUSTOMERS " +
                     "(id INTEGER NOT NULL AUTO_INCREMENT," +
@@ -22,6 +24,7 @@ public class DataBaseInit {
                     " age INTEGER, " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
+            System.out.println("Creating table customers...");
         } catch (Exception e) {
             System.out.println("Tabela o nazwie Customers już istnieje");
         }
@@ -29,8 +32,8 @@ public class DataBaseInit {
     }
 
     private void createTableContacts() {
+
         try {
-            System.out.println("Creating table contacts...");
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE CONTACTS " +
                     "(id INTEGER NOT NULL AUTO_INCREMENT," +
@@ -39,9 +42,11 @@ public class DataBaseInit {
                     " contact VARCHAR(255), " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
+            System.out.println("Creating table contacts...");
         } catch (Exception e) {
             System.out.println("Tabela o nazwie Contacts już istnieje");
         }
     }
+
 
 }
