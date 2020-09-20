@@ -13,12 +13,12 @@ public class PasswordInserter {
         String filePath = sc.nextLine();
         File test1 = new File(filePath);
 
-        FileReader fileReader = null;
-        BufferedReader bufferedReader = null;
+        FileReader fileReader;
+        BufferedReader bufferedReader;
         try {
             fileReader = new FileReader(test1);
             bufferedReader = new BufferedReader(fileReader);
-            String nextLine = null;
+            String nextLine;
             int i = 0;
             while ((nextLine = bufferedReader.readLine()) != null) {
                 userdata[i] = nextLine;

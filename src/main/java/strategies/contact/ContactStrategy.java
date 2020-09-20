@@ -10,7 +10,7 @@ public class ContactStrategy {
         return strategies.stream()
                 .filter(s1 -> s1.isValidContactType(contact))
                 .findFirst()
-                .map(s1 -> s1.getContactType())
+                .map(AbstractContactTypeStrategy::getContactType)
                 .orElse(0);
     }
 

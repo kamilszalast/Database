@@ -1,6 +1,5 @@
 package strategies.parser;
 
-import com.mysql.cj.util.StringUtils;
 import factories.ContactFactory;
 import models.Contact;
 import models.Customer;
@@ -10,6 +9,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CsvStrategy implements AbstractCustomersParserStrategy {
@@ -35,7 +35,7 @@ public class CsvStrategy implements AbstractCustomersParserStrategy {
             while (line != null) {
                 String[] customerData = line.split(",");
                 String[] contactData = Arrays.copyOfRange(customerData, 4, customerData.length);
-                Customer customer = new Customer(customerData[0], customerData[1], StringUtils.isNullOrEmpty(customerData[2]) ? null : Integer.parseInt(customerData[2]), customerData[3], createContact(Arrays.asList(contactData)));
+                Customer customer = new Customer(customerData[0], customerData[1], isNullOrEmpty(customerData[2]) ? null : Integer.parseInt(customerData[2]), customerData[3], createContact(Arrays.asList(contactData)));
                 customers.add(customer);
                 line = br.readLine();
             }
@@ -53,6 +53,9 @@ public class CsvStrategy implements AbstractCustomersParserStrategy {
                 .collect(Collectors.toList());
     }
 
+    private boolean isNullOrEmpty(String customerDatum) {
+        return Objects.isNull(customerDatum) || customerDatum.isEmpty();
+    }
 
 }
 

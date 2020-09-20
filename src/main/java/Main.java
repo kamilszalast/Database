@@ -1,6 +1,5 @@
-package executable;
-
 import configuration.DataBaseInit;
+import executable.Worker;
 import factories.ContactFactory;
 import repositories.ContactRepository;
 import repositories.CustomerRepository;
