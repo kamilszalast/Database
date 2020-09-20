@@ -13,11 +13,9 @@ import utils.Chat;
 public class Main {
 
     public static void main(String[] args) {
-
         if (initDatabase()) {
             createWorker().doWork();
         } else System.out.println("Błąd połączenia z bazą danych");
-
     }
 
     private static boolean initDatabase() {

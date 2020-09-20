@@ -24,15 +24,13 @@ public class DataBaseInit {
                     " age INTEGER, " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
-            System.out.println("Creating table customers...");
+            System.out.println("Tworzenie tabeli Customers...");
         } catch (Exception e) {
             System.out.println("Tabela o nazwie Customers już istnieje");
         }
-
     }
 
     private void createTableContacts() {
-
         try {
             Statement stmt = connection.createStatement();
             String sql = "CREATE TABLE CONTACTS " +
@@ -42,7 +40,7 @@ public class DataBaseInit {
                     " contact VARCHAR(255), " +
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
-            System.out.println("Creating table contacts...");
+            System.out.println("Tworzenie tabeli Contacts...");
         } catch (Exception e) {
             System.out.println("Tabela o nazwie Contacts już istnieje");
         }

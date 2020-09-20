@@ -30,6 +30,7 @@ public class Worker {
             if (FileUtils.isFileNotEmpty(filePath)) {
                 List<Customer> customersList = customersParserStrategy.parseFile(filePath);
                 saveToDatabase(customersList);
+                System.out.println("Dane z pliku zostały umieszczone w bazie danych");
             } else {
                 System.out.println("Plik jest pusty");
             }

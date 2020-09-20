@@ -13,7 +13,7 @@ public class MyConnection {
             String[] userAndPassword = PasswordInserter.passwordInsert();
             userName = userAndPassword[0];
             password = userAndPassword[1];
-            System.out.println("Connected");
+            System.out.println("Uzyskano połączenie z bazą danych");
         }
 
         try {
