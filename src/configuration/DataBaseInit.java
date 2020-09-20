@@ -23,7 +23,7 @@ public class DataBaseInit {
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Tabela o nazwie Customers już istnieje");
         }
 
     }
@@ -40,7 +40,7 @@ public class DataBaseInit {
                     " PRIMARY KEY ( id ))";
             stmt.executeUpdate(sql);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Tabela o nazwie Contacts już istnieje");
         }
     }
 

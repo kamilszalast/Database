@@ -30,7 +30,7 @@ public class Worker {
             List<Customer> customersList = customersParserStrategy.parseFile(filePath);
             saveToDatabase(customersList);
         } else {
-            System.out.println("Scieżka do pliku błędna");
+            System.out.println("Podany plik nie istieje");
         }
     }
 
