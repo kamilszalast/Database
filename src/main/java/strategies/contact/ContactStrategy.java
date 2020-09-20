@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ContactStrategy {
-    List<AbstractContactTypeStrategy> strategies = Arrays.asList(new JabberStrategy(), new PhoneStrategy(), new EmailStrategy());
+    private final List<AbstractContactTypeStrategy> strategies = Arrays.asList(new JabberStrategy(), new PhoneStrategy(), new EmailStrategy());
 
     public int getValidContactType(String contact) {
         return strategies.stream()

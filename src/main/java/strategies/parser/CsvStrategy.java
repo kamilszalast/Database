@@ -35,7 +35,7 @@ public class CsvStrategy implements AbstractCustomersParserStrategy {
             while (line != null) {
                 String[] customerData = line.split(",");
                 String[] contactData = Arrays.copyOfRange(customerData, 4, customerData.length);
-                Customer customer = new Customer(customerData[0], customerData[1], isNullOrEmpty(customerData[2]) ? null : Integer.parseInt(customerData[2]), customerData[3], createContact(Arrays.asList(contactData)));
+                Customer customer = getCustomerFromCustomerData(customerData, contactData);
                 customers.add(customer);
                 line = br.readLine();
             }
@@ -45,6 +45,13 @@ public class CsvStrategy implements AbstractCustomersParserStrategy {
         return customers;
     }
 
+    private Customer getCustomerFromCustomerData(String[] customerData, String[] contactData) {
+        return new Customer(customerData[0], customerData[1], getAgeFromCustomerData(customerData), customerData[3], createContact(Arrays.asList(contactData)));
+    }
+
+    private Integer getAgeFromCustomerData(String[] customerData) {
+        return isNullOrEmpty(customerData[2]) ? null : Integer.parseInt(customerData[2]);
+    }
 
     @Override
     public List<Contact> createContact(List<String> contacts) {
