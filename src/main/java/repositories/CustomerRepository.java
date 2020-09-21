@@ -4,7 +4,9 @@ import configuration.MyConnection;
 import models.Customer;
 import models.CustomerEntity;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class CustomerRepository {
     private static long id = 0;

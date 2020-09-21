@@ -1,8 +1,8 @@
 package services;
 
-import repositories.ContactRepository;
 import models.Contact;
 import models.ContactEntity;
+import repositories.ContactRepository;
 
 public class ContactService {
     private final ContactRepository contactRepository;

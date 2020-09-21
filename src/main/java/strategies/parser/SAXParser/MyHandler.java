@@ -24,14 +24,11 @@ public class MyHandler extends DefaultHandler {
     private static final String EMAIL = "email";
     private static final String ICQ = "icq";
     private static final String JABBER = "jabber";
-
+    private final ContactStrategy contactStrategy = new ContactStrategy();
+    private final ContactFactory contactFactory = new ContactFactory(contactStrategy);
     private List<Customer> customers = null;
     private List<String> contactsSting = null;
     private String elementValue;
-
-    private final ContactStrategy contactStrategy = new ContactStrategy();
-    private final ContactFactory contactFactory = new ContactFactory(contactStrategy);
-
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {

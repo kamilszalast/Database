@@ -25,36 +25,36 @@ public class Customer {
         return name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    public String getCity() {
+        return city;
+    }
+
     public void setCity(String city) {
         this.city = city;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
     }
 
     public void setContacts(List<Contact> contacts) {

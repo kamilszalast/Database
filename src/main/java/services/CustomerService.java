@@ -1,8 +1,8 @@
 package services;
 
-import repositories.CustomerRepository;
 import models.Customer;
 import models.CustomerEntity;
+import repositories.CustomerRepository;
 
 public class CustomerService {
     private final CustomerRepository customerRepository;

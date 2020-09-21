@@ -1,10 +1,10 @@
 package executable;
 
+import models.Customer;
+import models.CustomerEntity;
 import services.ContactService;
 import services.CustomerService;
 import strategies.parser.CustomersParserStrategy;
-import models.Customer;
-import models.CustomerEntity;
 import utils.Chat;
 import utils.FileUtils;
 
