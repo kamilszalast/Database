@@ -17,7 +17,7 @@ public class DataBaseInit {
     private void createTableCustomers() {
         try {
             Statement stmt = connection.createStatement();
-            String sql = "CREATE TABLE CUSTOMERS " +
+            String sql = "CREATE TABLE CUSTOMERS" +
                     "(id INTEGER NOT NULL AUTO_INCREMENT," +
                     " name VARCHAR(255), " +
                     " surname VARCHAR(255), " +
@@ -33,12 +33,13 @@ public class DataBaseInit {
     private void createTableContacts() {
         try {
             Statement stmt = connection.createStatement();
-            String sql = "CREATE TABLE CONTACTS " +
+            String sql = "CREATE TABLE CONTACTS" +
                     "(id INTEGER NOT NULL AUTO_INCREMENT," +
                     " id_customer INTEGER, " +
                     " type INTEGER, " +
                     " contact VARCHAR(255), " +
-                    " PRIMARY KEY ( id ))";
+                    " PRIMARY KEY ( id )," +
+                    "FOREIGN KEY (id_customer) references CUSTOMERS(id))";
             stmt.executeUpdate(sql);
             System.out.println("Tworzenie tabeli Contacts...");
         } catch (Exception e) {
